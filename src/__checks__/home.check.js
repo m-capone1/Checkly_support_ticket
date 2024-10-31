@@ -1,9 +1,9 @@
-const path = require('path');
-const { BrowserCheck } = require('checkly/constructs');
-const { smsChannel, emailChannel } = require('../alert-channels');
-const { websiteGroup } = require('./website-group.check');
+const path = require("path");
+const { BrowserCheck } = require("checkly/constructs");
+const { emailChannel } = require("../alert-channels");
+const { websiteGroup } = require("./website-group.check");
 
-const alertChannels = [smsChannel, emailChannel];
+const alertChannels = [emailChannel];
 
 /*
  * In this example, we bundle all basic checks needed to check the Checkly homepage. We explicitly define the Browser
@@ -12,22 +12,22 @@ const alertChannels = [smsChannel, emailChannel];
  */
 
 // We can define multiple checks in a single *.check.js file.
-new BrowserCheck('homepage-browser-check', {
-  name: 'Home page',
+new BrowserCheck("homepage-browser-check", {
+  name: "Home page",
   alertChannels,
   group: websiteGroup,
   code: {
-    entrypoint: path.join(__dirname, 'homepage.spec.js'),
+    entrypoint: path.join(__dirname, "homepage.spec.js"),
   },
   runParallel: true,
 });
 
-new BrowserCheck('login-browser-check', {
-  name: 'Login Check',
+new BrowserCheck("login-browser-check", {
+  name: "Login Check",
   alertChannels,
   group: websiteGroup,
   code: {
-    entrypoint: path.join(__dirname, 'login.spec.js'),
+    entrypoint: path.join(__dirname, "login.spec.js"),
   },
   runParallel: true,
 });
